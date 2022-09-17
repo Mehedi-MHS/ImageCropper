@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport"content="width=device-width,initial-scale=1">
+<meta charset="utf-8" />
+<style type="text/css">
+canvas{
+ border:5px groove silver;
+}
+</style>
+</head>
+<body>
+<button onclick="crop()">Crop</button>
+<a download="croppedImage.jpg" onclick="save(this)">Download</button>
+
+<canvas width="310"height="300"></canvas>
+<script type="text/javascript">
+ var canvas=document.querySelector("canvas");
+ var ctx=canvas.getContext("2d");
+ var img=new Image();
+img.src="dates.jpg";
+img.addEventListener("load",function(){
+ ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+});
+  window.addEventListener("load",function(){
+   draw();
+});
+
+function draw(){
+ 
+   var start=function(e){
+      ctx.beginPath();
+      var px=e.changedTouches[0].pageX;
+      var py=e.changedTouches[0].pageY-canvas.offsetTop; 
+      ctx.moveTo(px,py);
+   };
+   var move=function(e){
+      e.preventDefault();
+      var px=e.changedTouches[0].pageX;
+      var py=e.changedTouches[0].pageY-canvas.offsetTop;
+      ctx.lineTo(px,py);
+      ctx.stroke();
+   };
+   canvas.addEventListener("touchstart",start,false);
+   canvas.addEventListener("touchmove",move,false);
+}
+
+
+function crop(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clip();
+  
+var img=new Image();
+img.src="dates.jpg";
+img.addEventListener("load",function(){
+ ctx.drawImage(img,0,0,canvas.width,canvas.height);
+});
+}
+
+function save(img){
+  img.href=canvas.toDataURL("image/jpg");
+}
+
+
+</script>
+
+
+
+</body>
+</html>
