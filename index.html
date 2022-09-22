@@ -11,8 +11,7 @@
     </style>
   </head>
   <body>
-<a download="croppedImage.jpg" onclick="save(this)">Download</button>
-    <button onclick="crop()">Crop</button>
+ <button onclick="crop()">Crop</button>
 
     <canvas width="310" height="300"></canvas>
     <script type="text/javascript">
@@ -81,9 +80,9 @@
         });
       }
 
-      function save(img) {
-        img.href = canvas.toDataURL("image/jpg");
-      }
+    //  function save(img) {
+     //   img.href = canvas.toDataURL("image/jpg");
+     // }
     </script>
   </body>
 </html>
